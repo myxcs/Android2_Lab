@@ -12,7 +12,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Button add, update, delete;
 
-    private EditText title, content, date, type;
 
 
     @Override
@@ -25,10 +24,6 @@ public class MainActivity extends AppCompatActivity {
         delete = findViewById(R.id.delete);
 
         //editTexts
-        title = findViewById(R.id.title);
-        content = findViewById(R.id.content);
-        date = findViewById(R.id.date);
-        type = findViewById(R.id.type);
 
         //button click
         add.setOnClickListener(new View.OnClickListener() {
