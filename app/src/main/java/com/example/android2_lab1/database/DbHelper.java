@@ -1,33 +1,37 @@
 package com.example.android2_lab1.database;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.android2_lab1.dao.SanPhamDAO;
+import androidx.annotation.Nullable;
 
-public class DbHelper {
+import com.example.android2_lab1.dao.UserDAO;
 
+public class DbHelper extends SQLiteOpenHelper {
 
-//    public DbHelper(Context context) {
-//        super(context, "todo.db", null, 1);
-//    }
+    public static final String NAME_DB = "user.db";
+    public static final int VERSION_DB = 1;
+    public DbHelper(@Nullable Context context) {
 
-//    @Override
-//    public void onCreate(SQLiteDatabase db) {
-//        String sql = "CREATE TABLE todo (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, content TEXT, date TEXT, type TEXT)";
-//        db.execSQL(sql);
-//
-//        String data = "INSERT INTO todo(title, content, date, type) VALUES('title', 'content', 'date', 'type')";
-//        db.execSQL(data);
-//
-//
-//    }
-//    @Override
-//    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//
-//        if (oldVersion != newVersion) {
-//            db.execSQL("DROP TABLE IF EXISTS todo");
-//            onCreate(db);
-//        }
-//    }
+        super(context, NAME_DB, null, VERSION_DB);
+    }
+    @Override
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        //hàm này chỉ chạy khi chưa có cơ sở dự liệu// sex chạy đầu tiên, dùng để tạo bảng
+        String createTableUser = "CREATE TABLE userdb (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " name TEXT NOT NULL," +
+                " address TEXT NOT NULL, " +
+                "phone TEXT NOT NULL);";
+        sqLiteDatabase.execSQL(createTableUser);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+        //sẽ chạy khi version thay đổi
+        //nơi này thay đổi database
+    }
+
 }
