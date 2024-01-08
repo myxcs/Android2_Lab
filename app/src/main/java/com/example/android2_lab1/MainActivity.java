@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button add, show;
 
-    private EditText id, name, address, phone;
+    private EditText name, address, phone;
 
 //    private ArrayList<UserModel> listUser = new ArrayList<>();
 //    private ArrayList<String> list = new ArrayList<>();
@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         show = findViewById(R.id.show);
 
         //editTexts
-        id = findViewById(R.id.user_id);
         name = findViewById(R.id.user_name);
         address = findViewById(R.id.user_address);
         phone = findViewById(R.id.user_phone);
@@ -94,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
 
                 sqLiteDatabase = dbHelper.getWritableDatabase();
                 ContentValues contentValues = new ContentValues();
-                contentValues.put("id", id.getText().toString());
                 contentValues.put("name", name.getText().toString());
                 contentValues.put("address", address.getText().toString());
                 contentValues.put("phone", phone.getText().toString());
@@ -113,14 +111,15 @@ public class MainActivity extends AppCompatActivity {
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              startActivities(new Intent[]{new Intent(MainActivity.this, DisplayData.class)});
+
+                Intent intent = new Intent(MainActivity.this, DisplayData.class);
+                startActivity(intent);
 
             }
         });
     }
 
     private void cleardata() {
-        id.setText("");
         name.setText("");
         address.setText("");
         phone.setText("");

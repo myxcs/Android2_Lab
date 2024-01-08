@@ -27,12 +27,12 @@ public class DbHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //hàm này chỉ chạy khi chưa có cơ sở dự liệu// sex chạy đầu tiên, dùng để tạo bảng
-        String createTableUser = "CREATE TABLE TABLE_USER (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "name TEXT NOT NULL," +
-                "address TEXT NOT NULL, " +
-                "phone TEXT NOT NULL);";
+        //hàm này chỉ chạy khi chưa có cơ sở dự liệu// sẽ chạy đầu tiên, dùng để tạo bảng
+        String createTableUser = "CREATE TABLE " + TABLE_USER + "("
+                + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "name TEXT,"
+                + "address TEXT,"
+                + "phone TEXT)";
         db.execSQL(createTableUser);
     }
 

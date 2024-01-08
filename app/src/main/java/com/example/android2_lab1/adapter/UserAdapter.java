@@ -16,9 +16,50 @@ import com.example.android2_lab1.model.UserModel;
 
 import java.util.ArrayList;
 
-public class UserAdapter
-        //extends RecyclerView.Adapter<UserAdapter.ViewHolder>
-{
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
+
+    private ArrayList<UserModel> listUser;
+    private Context context;
+
+    public UserAdapter(Context context, ArrayList<UserModel> listUser) {
+        this.context = context;
+        this.listUser = listUser;
+    }
+    @NonNull
+    @Override
+    public UserAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_item, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull UserAdapter.ViewHolder holder, int position) {
+
+        UserModel userModel = listUser.get(position);
+        holder.name.setText(userModel.getName());
+        holder.address.setText(userModel.getAddress());
+        holder.phone.setText(userModel.getPhone());
+    }
+
+    @Override
+    public int getItemCount() {
+        return listUser.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView name, address, phone;
+   //     private Button update, delete;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            name = itemView.findViewById(R.id.user_name);
+            address = itemView.findViewById(R.id.user_address);
+            phone = itemView.findViewById(R.id.user_phone);
+
+           // update = itemView.findViewById(R.id.update);
+          //  delete = itemView.findViewById(R.id.delete);
+        }
+    }
 //
 //    private Context context;
 //    private ArrayList<UserModel> listUser;
