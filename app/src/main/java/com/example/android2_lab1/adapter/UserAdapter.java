@@ -1,11 +1,13 @@
 package com.example.android2_lab1.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +38,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull UserAdapter.ViewHolder holder, int position) {
 
         UserModel userModel = listUser.get(position);
+
         holder.name.setText(userModel.getName());
         holder.address.setText(userModel.getAddress());
         holder.phone.setText(userModel.getPhone());
@@ -49,15 +52,43 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView name, address, phone;
-   //     private Button update, delete;
+        private Button update, delete;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.user_name);
-            address = itemView.findViewById(R.id.user_address);
-            phone = itemView.findViewById(R.id.user_phone);
+            name = itemView.findViewById(R.id.name);
+            address = itemView.findViewById(R.id.address);
+            phone = itemView.findViewById(R.id.phone);
 
-           // update = itemView.findViewById(R.id.update);
-          //  delete = itemView.findViewById(R.id.delete);
+            update = itemView.findViewById(R.id.update);
+            delete = itemView.findViewById(R.id.delete);
+
+            update.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(context, "Update", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(context, UpdateActivity.class);
+//                    intent.putExtra("id", listUser.get(getAdapterPosition()).getId());
+//                    intent.putExtra("name", listUser.get(getAdapterPosition()).getName());
+//                    intent.putExtra("address", listUser.get(getAdapterPosition()).getAddress());
+//                    intent.putExtra("phone", listUser.get(getAdapterPosition()).getPhone());
+//                    context.startActivity(intent);
+                }
+            });
+            delete.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(context, "Delete", Toast.LENGTH_SHORT).show();
+                    UserDAO userDAO = new UserDAO(context);
+                    userDAO.deleteUser(listUser.get(getAdapterPosition()).getId());
+                    listUser.remove(getAdapterPosition());
+                    notifyItemRemoved(getAdapterPosition());
+                    notifyItemRangeChanged(getAdapterPosition(), listUser.size());
+                }
+            });
         }
     }
 //

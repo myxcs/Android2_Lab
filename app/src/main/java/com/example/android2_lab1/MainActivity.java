@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     DbHelper dbHelper;
     SQLiteDatabase sqLiteDatabase;
 
-    Context context = this;
+    //Context context = this;
 
 
     @Override
