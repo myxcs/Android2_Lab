@@ -14,6 +14,10 @@ public class UserModel {
         this.phone = phone;
     }
 
+    public UserModel() {
+
+    }
+
     public int getId() {
         return id;
     }

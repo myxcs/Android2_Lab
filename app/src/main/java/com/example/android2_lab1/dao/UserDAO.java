@@ -51,4 +51,12 @@ public class UserDAO {
     public void deleteUser(int id) {
         database.delete("userdb", "id=?", new String[]{String.valueOf(id)});
     }
+
+    public void updateUser(UserModel userModel) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", userModel.getName());
+        contentValues.put("address", userModel.getAddress());
+        contentValues.put("phone", userModel.getPhone());
+        database.update("userdb", contentValues, "id=?", new String[]{String.valueOf(userModel.getId())});
+    }
 }

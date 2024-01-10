@@ -98,19 +98,22 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                     edit_phone.setText(listUser.get(getAdapterPosition()).getPhone());
 
                     //xu li su kien cac nut
-                    btn_update.setOnClickListener(new View.OnClickListener() {
+                   btn_update.setOnClickListener(new View.OnClickListener() {
 
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(context, "Update", Toast.LENGTH_SHORT).show();
-
-//                           UserModel userModel;
-//                            ContentValues contentValues = new ContentValues();
-//                            contentValues.put("name", edit_name.getText().toString());
-//                            contentValues.put("address", edit_address.getText().toString());
-//                            contentValues.put("phone", edit_phone.getText().toString());
-//                            database.update("userdb", contentValues, "id=?", new String[]{String.valueOf(listUser.get(getAdapterPosition()).getId())});
-                       }});
+                       @Override
+                       public void onClick(View v) {
+                           UserModel userModel = new UserModel();
+                           userModel.setId(listUser.get(getAdapterPosition()).getId());
+                           userModel.setName(edit_name.getText().toString());
+                           userModel.setAddress(edit_address.getText().toString());
+                           userModel.setPhone(edit_phone.getText().toString());
+                           userDAO = new UserDAO(context);
+                           userDAO.updateUser(userModel);
+                           listUser.set(getAdapterPosition(), userModel);
+                           notifyItemChanged(getAdapterPosition());
+                           dialog.dismiss();
+                       }
+                   });
                     btn_cancel.setOnClickListener(new View.OnClickListener() {
 
                         @Override
