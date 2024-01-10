@@ -50,20 +50,26 @@ public class MainActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //thêm dữ liệu
-                sqLiteDatabase = dbHelper.getWritableDatabase();
-                ContentValues contentValues = new ContentValues();
-                contentValues.put("name", name.getText().toString());
-                contentValues.put("address", address.getText().toString());
-                contentValues.put("phone", phone.getText().toString());
+                if (name.getText().toString().isEmpty() || address.getText().toString().isEmpty() || phone.getText().toString().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Vui lý nhập đủ thông tin", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    //thêm dữ liệu
+                    sqLiteDatabase = dbHelper.getWritableDatabase();
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put("name", name.getText().toString());
+                    contentValues.put("address", address.getText().toString());
+                    contentValues.put("phone", phone.getText().toString());
 
-                Long result = sqLiteDatabase.insert("userdb", null, contentValues);
+                   Long result = sqLiteDatabase.insert("userdb", null, contentValues);
 
-                if (result!=null) {
-                    Toast.makeText(MainActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-                    cleardata();
-                } else {
-                    Toast.makeText(MainActivity.this, "Thêm thất bại", Toast.LENGTH_SHORT).show();
+
+                    if (result!=null) {
+                        Toast.makeText(MainActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        cleardata();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
