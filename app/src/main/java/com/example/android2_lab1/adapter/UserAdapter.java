@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
@@ -31,7 +32,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private SQLiteDatabase database;
 
     private Context context;
-
 
 
     public UserAdapter(Context context, ArrayList<UserModel> listUser) {
@@ -84,7 +84,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                     dialog.setView(view);
 
                     //khai bao cac doi tuong trong dialog
-
                     TextView edit_name = view.findViewById(R.id.edit_user_name);
                     TextView edit_address = view.findViewById(R.id.edit_user_address);
                     TextView edit_phone = view.findViewById(R.id.edit_user_phone);
@@ -102,11 +101,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
                        @Override
                        public void onClick(View v) {
+                           //lay du lieu
                            UserModel userModel = new UserModel();
                            userModel.setId(listUser.get(getAdapterPosition()).getId());
                            userModel.setName(edit_name.getText().toString());
                            userModel.setAddress(edit_address.getText().toString());
                            userModel.setPhone(edit_phone.getText().toString());
+
+                           //update
                            userDAO = new UserDAO(context);
                            userDAO.updateUser(userModel);
                            listUser.set(getAdapterPosition(), userModel);
@@ -129,86 +131,33 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
 
-                    Toast.makeText(context, "Delete", Toast.LENGTH_SHORT).show();
-                    UserDAO userDAO = new UserDAO(context);
-                    userDAO.deleteUser(listUser.get(getAdapterPosition()).getId());
-                    listUser.remove(getAdapterPosition());
-                    notifyItemRemoved(getAdapterPosition());
-                    notifyItemRangeChanged(getAdapterPosition(), listUser.size());
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("Delete");
+                    builder.setMessage("Are you sure?");
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+                            userDAO = new UserDAO(context);
+                            userDAO.deleteUser(listUser.get(getAdapterPosition()).getId());
+                            listUser.remove(getAdapterPosition());
+                            notifyItemRemoved(getAdapterPosition());
+                            notifyItemRangeChanged(getAdapterPosition(), listUser.size());
+                        }
+                    });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+               builder.show();
                 }
             });
         }
     }
-//
-//    private Context context;
-//    private ArrayList<UserModel> listUser;
-//    UserDAO userDAO;
-//
-//    public UserAdapter(Context context, ArrayList<UserModel> listUser) {
-//        this.context = context;
-//        this.listUser = listUser;
-//        userDAO = new UserDAO(context);
-//    }
-//
-//    @NonNull
-//    @Override
-//    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        View view = LayoutInflater.from(context).inflate(R.layout.user_item, parent, false);
-//        return new ViewHolder(view);
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//
-//        //cập nhật dữ liệu lên cho từng view layout item_user
-////        UserModel userModel = listUser.get(position);
-////        holder.id.setText(String.valueOf(userModel.getId()));
-////        holder.name.setText(userModel.getName());
-////        holder.address.setText(userModel.getAddress());
-////        holder.phone.setText(userModel.getPhone());
-//        holder.id.setText(String.valueOf(listUser.get(position).getId()));
-//        holder.name.setText(listUser.get(position).getName());
-//        holder.address.setText(listUser.get(position).getAddress());
-//        holder.phone.setText(listUser.get(position).getPhone());
-//
-//        holder.update.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//            }
-//        });
-//
-//        holder.delete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-//
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        if (listUser != null) {
-//            return listUser.size();
-//        }
-//        return 0;
-//    }
-//
-//    public static class ViewHolder extends RecyclerView.ViewHolder {
-//
-//        //chứa toàn bộ view thuộc layout item_user
-//
-//        private TextView id, name, address, phone;
-//        private Button update, delete;
-//        public ViewHolder(@NonNull View itemView) {
-//            super(itemView);
-//            id = itemView.findViewById(R.id.user_id);
-//            name = itemView.findViewById(R.id.user_name);
-//            address = itemView.findViewById(R.id.user_address);
-//            phone = itemView.findViewById(R.id.user_phone);
-//
-//            update = itemView.findViewById(R.id.update);
-//            delete = itemView.findViewById(R.id.delete);
-//        }
-//    }
 }

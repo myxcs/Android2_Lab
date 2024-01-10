@@ -56,21 +56,20 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"/>
         <LinearLayout
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <Button
-
                 android:layout_marginHorizontal="50dp"
                 android:id="@+id/add"
                 android:text="ADD"
                 android:backgroundTint="#4CAF50"
                 android:gravity="center"
-                android:textSize="10dp"
-                android:layout_width="100dp"
+                android:textSize="15dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 ></Button>
 <!--            <Button-->
@@ -87,13 +86,12 @@
 
             <Button
                 android:layout_marginHorizontal="50dp"
-
                 android:id="@+id/show"
                 android:text="SHOW"
                 android:backgroundTint="#2196F3"
                 android:gravity="center"
-                android:textSize="10dp"
-                android:layout_width="100dp"
+                android:textSize="15dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"/>
 <!--            <Button-->
 <!--                android:layout_marginHorizontal="10dp"-->

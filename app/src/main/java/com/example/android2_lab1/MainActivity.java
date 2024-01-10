@@ -28,21 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText name, address, phone;
 
-//    private ArrayList<UserModel> listUser = new ArrayList<>();
-//    private ArrayList<String> list = new ArrayList<>();
-//
-//    private UserAdapter userAdapter;
-//
-//    private UserModel userModel;
-//
-////    private RecyclerView recyclerView;
-//
-//    private UserDAO userDAO;
     DbHelper dbHelper;
     SQLiteDatabase sqLiteDatabase;
-
-    //Context context = this;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,38 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
         dbHelper = new DbHelper(this);
 
-//        //user
-//        userDAO = new UserDAO(MainActivity.this);
-//        UserDAO userDAO = new UserDAO(context);
-//        listUser = userDAO.getAllUser();
-//
-//        //recyclerView
-//        recyclerView = findViewById(R.id.list_user);
-//
-//        //cắm máy tính vào máy chiếu
-//        userAdapter = new UserAdapter(this, listUser);
-//
 //        //button click
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //thêm dữ liệu
-//                String UserId = id.getText().toString();
-//                String UserName = name.getText().toString();
-//                String UserAddress = address.getText().toString();
-//                String UserPhone = phone.getText().toString();
-//
-//                UserModel userModel = new UserModel(Integer.parseInt(UserId), UserName, UserAddress, UserPhone);
-//                if(userDAO.insertUser(userModel) > 0) {
-//                    Toast.makeText(MainActivity.this, "Thêm dữ liệu thành công", Toast.LENGTH_SHORT).show();
-//                }
-//                else {
-//                    Toast.makeText(MainActivity.this, "Thêm dữ liệu thất bại", Toast.LENGTH_SHORT).show();
-//                }
-//                userDAO.insertUser(new UserModel(Integer.parseInt(id.getText().toString()),
-//                        name.getText().toString(), address.getText().toString(), phone.getText().toString()));
-
-
                 sqLiteDatabase = dbHelper.getWritableDatabase();
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("name", name.getText().toString());
@@ -100,10 +60,10 @@ public class MainActivity extends AppCompatActivity {
                 Long result = sqLiteDatabase.insert("userdb", null, contentValues);
 
                 if (result!=null) {
-                    Toast.makeText(MainActivity.this, "Them thanh cong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                     cleardata();
                 } else {
-                    Toast.makeText(MainActivity.this, "Them that bai", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Thêm thất bại", Toast.LENGTH_SHORT).show();
                 }
             }
         });
