@@ -1,7 +1,11 @@
 package com.example.android2_lab1.adapter;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +25,14 @@ import java.util.ArrayList;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private ArrayList<UserModel> listUser;
+
+    private UserDAO userDAO;
+
+    private SQLiteDatabase database;
+
     private Context context;
+
+
 
     public UserAdapter(Context context, ArrayList<UserModel> listUser) {
         this.context = context;
@@ -66,14 +77,48 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
                 @Override
                 public void onClick(View v) {
+                    //tao dialog
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    AlertDialog dialog = builder.create();
+                    View view = LayoutInflater.from(context).inflate(R.layout.layout_edit, null);
+                    dialog.setView(view);
 
-                    Toast.makeText(context, "Update", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(context, UpdateActivity.class);
-//                    intent.putExtra("id", listUser.get(getAdapterPosition()).getId());
-//                    intent.putExtra("name", listUser.get(getAdapterPosition()).getName());
-//                    intent.putExtra("address", listUser.get(getAdapterPosition()).getAddress());
-//                    intent.putExtra("phone", listUser.get(getAdapterPosition()).getPhone());
-//                    context.startActivity(intent);
+                    //khai bao cac doi tuong trong dialog
+
+                    TextView edit_name = view.findViewById(R.id.edit_user_name);
+                    TextView edit_address = view.findViewById(R.id.edit_user_address);
+                    TextView edit_phone = view.findViewById(R.id.edit_user_phone);
+
+                    Button btn_update = view.findViewById(R.id.update);
+                    Button btn_cancel = view.findViewById(R.id.cancel);
+
+                    //set text
+                    edit_name.setText(listUser.get(getAdapterPosition()).getName());
+                    edit_address.setText(listUser.get(getAdapterPosition()).getAddress());
+                    edit_phone.setText(listUser.get(getAdapterPosition()).getPhone());
+
+                    //xu li su kien cac nut
+                    btn_update.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(context, "Update", Toast.LENGTH_SHORT).show();
+
+//                           UserModel userModel;
+//                            ContentValues contentValues = new ContentValues();
+//                            contentValues.put("name", edit_name.getText().toString());
+//                            contentValues.put("address", edit_address.getText().toString());
+//                            contentValues.put("phone", edit_phone.getText().toString());
+//                            database.update("userdb", contentValues, "id=?", new String[]{String.valueOf(listUser.get(getAdapterPosition()).getId())});
+                       }});
+                    btn_cancel.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
                 }
             });
             delete.setOnClickListener(new View.OnClickListener() {

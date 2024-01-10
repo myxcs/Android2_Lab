@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit User"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:layout_margin="20dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tên:"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="15dp"/>
+        <EditText
+            android:id="@+id/edit_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Địa chỉ"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="15dp"/>
+        <EditText
+            android:id="@+id/edit_user_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Số điện thoại:"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="15dp"/>
+        <EditText
+            android:id="@+id/edit_user_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"/>
+
+
+        <LinearLayout
+            android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_marginHorizontal="50dp"
+                android:id="@+id/update"
+                android:text="Update"
+                android:backgroundTint="#4CAF50"
+                android:gravity="center"
+                android:textSize="10dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                ></Button>
+            <!--            <Button-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:layout_marginHorizontal="10dp"-->
+            <!--                android:id="@+id/update"-->
+            <!--                android:text="UPDATE"-->
+            <!--                android:backgroundTint="#CDDC39"-->
+            <!--                android:gravity="center"-->
+            <!--                android:textSize="10dp"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                ></Button>-->
+
+            <Button
+                android:layout_marginHorizontal="50dp"
+
+                android:id="@+id/cancel"
+                android:text="Cancel"
+                android:backgroundTint="#2196F3"
+                android:gravity="center"
+                android:textSize="10dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+            <!--            <Button-->
+            <!--                android:layout_marginHorizontal="10dp"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:id="@+id/delete"-->
+            <!--                android:text="DELETE"-->
+            <!--                android:gravity="center"-->
+            <!--                android:backgroundTint="#F44336"-->
+            <!--                android:textSize="10dp"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                ></Button>-->
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
