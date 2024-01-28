@@ -1,6 +1,8 @@
 package com.example.android2_lab1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.android2_lab1.adapter.UserAdapter;
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     DbHelper dbHelper;
     SQLiteDatabase sqLiteDatabase;
+
+    FragmentManager fragment = getSupportFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MainActivity.this, DisplayData.class);
-                startActivity(intent);
+                   getSupportFragmentManager().beginTransaction().replace(R.id.container, new DisplayFragment()).commit();
+
 
             }
         });
